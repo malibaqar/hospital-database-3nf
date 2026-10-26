@@ -1,0 +1,11 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE patient(id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+CREATE TABLE specialty(id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE);
+CREATE TABLE doctor(id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty_id INTEGER NOT NULL REFERENCES specialty(id));
+CREATE TABLE appointment(id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patient(id), doctor_id INTEGER NOT NULL REFERENCES doctor(id), starts_at TEXT NOT NULL, UNIQUE(doctor_id,starts_at));
+CREATE TABLE medication(id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE);
+CREATE TABLE prescription(appointment_id INTEGER NOT NULL REFERENCES appointment(id), medication_id INTEGER NOT NULL REFERENCES medication(id), instructions TEXT NOT NULL, PRIMARY KEY(appointment_id,medication_id));
+INSERT INTO patient VALUES(1,'Synthetic Patient');
+INSERT INTO specialty VALUES(1,'General Medicine');
+INSERT INTO doctor VALUES(1,'Synthetic Doctor',1);
+INSERT INTO appointment VALUES(1,1,1,'2026-07-01T10:00:00');

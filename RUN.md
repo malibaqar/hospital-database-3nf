@@ -1,0 +1,1 @@
+Run `sqlite3 hospital.db < schema.sql` in a fresh database. Query appointments using joins on patient and doctor. Non-key attributes describe each table’s key; specialty and medication names are factored into separate entities. Scheduling constraints are deliberately simplified; this is not a clinical records system.
